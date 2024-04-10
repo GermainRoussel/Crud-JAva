@@ -40,6 +40,32 @@ public class ApprenantManagement {
         return apprenants;
     }
 
+    public static Apprenant getApprenantById(int id) {
+        Apprenant apprenant = null;
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String sql = "SELECT * FROM apprenants WHERE Id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String promotionName = resultSet.getString("PromotionName");
+                String name = resultSet.getString("Name");
+                String lastName = resultSet.getString("LastName");
+                String adress = resultSet.getString("Adress");
+                String email = resultSet.getString("Email");
+                String tel = resultSet.getString("Tel");
+                int absence = resultSet.getInt("Absence");
+                boolean isDelegue = resultSet.getBoolean("IsDelegue");
+
+                apprenant = new Apprenant(id, promotionName, name, lastName, adress, email, tel, absence, isDelegue);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de l'apprenant !");
+            e.printStackTrace();
+        }
+        return apprenant;
+    }
+
     public static void updateAbsence(int id, int newAbsence) {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String sql = "UPDATE apprenants SET Absence = ? WHERE Id = ?";

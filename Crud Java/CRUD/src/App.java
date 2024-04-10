@@ -64,7 +64,19 @@ public class App {
             int id = scanner.nextInt();
             
             scanner.nextLine(); // Consume the newline left-over
+           
+            Apprenant apprenantToDelete = ApprenantManagement.getApprenantById(id);
             
+            if (apprenantToDelete == null) {
+                System.out.println("Aucun apprenant trouvé avec cet identifiant.");
+                return;
+            }
+        
+            // Vérifier si IsDelegue est à 1
+            if (apprenantToDelete.getIsDelegue()) {
+                System.out.println("Vous ne pouvez pas supprimer un apprenant délégué !");
+                return;
+            }
         
             // Appeler la méthode de gestion pour supprimer l'apprenant
             ApprenantManagement.deleteApprenant(id);
@@ -103,6 +115,10 @@ public class App {
         System.out.print("Est-ce que l'étudiant est délégué ? (true/false) : ");
         boolean isDelegue = scanner.nextBoolean();
 
+        if (isDuplicateApprenant(name)) {
+            System.out.println("Un apprenant avec le même nom existe déjà !");
+            return;}
+
         // Créer un nouvel objet Apprenant avec les informations fournies
         Apprenant nouvelApprenant = new Apprenant(id, promotionName, name, lastName, adress, email, tel, absence, isDelegue);
         System.out.println(nouvelApprenant);
@@ -112,6 +128,21 @@ public class App {
 
         System.out.println("L'étudiant a été ajouté avec succès !");
 
+    }
+
+    private static boolean isDuplicateApprenant(String name) {
+        // Récupérer tous les apprenants existants
+        List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
+        // Parcourir la liste des apprenants existants
+        for (Apprenant apprenant : apprenants) {
+            // Vérifier si le nom et le prénom correspondent à un apprenant existant
+            if (apprenant.getName().equalsIgnoreCase(name)) {
+                System.out.println("Un apprenant avec le même nom existe déjà !");
+                return true; // Un apprenant avec le même nom/prénom existe déjà
+                
+            }
+        }
+        return false; // Aucun apprenant avec le même nom/prénom trouvé
     }
     private static void updateAbsence() {
         System.out.println("\n--- Mettre à jour le nombre d'absences d'un apprenant ---");
