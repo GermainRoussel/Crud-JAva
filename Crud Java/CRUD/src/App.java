@@ -64,9 +64,9 @@ public class App {
         if (apprenants.isEmpty()) {
             System.out.println("Aucun apprenant trouvé pour la promotion '" + promotionName + "'.");
         } else {
-            System.out.println("Voici les Apprenants pour la promotion '" + promotionName + "' :");
+            System.out.println("Voici lesApprenants pour la promotion '" + promotionName + "' :");
             for (Apprenant apprenant : apprenants) {
-                System.out.println("ID: " + apprenant.getId() + ", Nom: " + apprenant.getName() + ", Promotion: " + apprenant.getPromotionName());
+                System.out.println("ID: " + apprenant.getId() + ", Nom: " + apprenant.getName() + ", Promotion: " + apprenant.getPromotionName() + ", Absence: " + apprenant.getAbsence());
             }
         }
     }
