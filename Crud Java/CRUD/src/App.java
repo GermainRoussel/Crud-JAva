@@ -54,6 +54,7 @@ public class App {
     }
 
         private static void deleteApprenant() {
+            viewAllApprenants();
             System.out.println("\n--- Supprimer un apprenant ---");
             System.out.print("Entrez l'identifiant de l'apprenant à supprimer : ");
             int id = scanner.nextInt();
