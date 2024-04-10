@@ -24,7 +24,7 @@ public class ApprenantManagement {
                 boolean isDelegue = resultSet.getBoolean("IsDelegue");
                 
                 Apprenant apprenant = new Apprenant(id, promotionName, name, lastName, adress, email, tel, absence, isDelegue);
-                
+
                 System.out.println("ID apprenant :" + apprenant.getId());
                 System.out.println("Nom apprenant :" + apprenant.getName());
                 
@@ -36,6 +36,24 @@ public class ApprenantManagement {
         return apprenants;
     }
 
+    public static void updateAbsence(int id, int newAbsence) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String sql = "UPDATE apprenants SET Absence = ? WHERE Id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, newAbsence);
+            statement.setInt(2, id);
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Nombre d'absences mis à jour avec succès !");
+            } else {
+                System.out.println("Aucun apprenant trouvé avec cet identifiant.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour du nombre d'absences !");
+            e.printStackTrace();
+        }
+    }
     public static void deleteApprenant(int id) {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String sql = "DELETE FROM apprenants WHERE Id = ?";

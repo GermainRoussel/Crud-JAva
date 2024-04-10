@@ -18,6 +18,7 @@ public class App {
             System.out.println("1. Créé apprenant");
             System.out.println("2. Voir les apprenants");
             System.out.println("3. Supprimer un apprenant");
+            System.out.println("4. Mettre à jour le nombre d'absences d'un apprenant");
         
             System.out.print("Select an option: ");
             
@@ -33,6 +34,9 @@ public class App {
                      break;
                 case 3:
                     deleteApprenant();
+                    break;
+                case 4:
+                    updateAbsence();
                     break;
             
                 case 6:
@@ -108,6 +112,19 @@ public class App {
 
         System.out.println("L'étudiant a été ajouté avec succès !");
 
+    }
+    private static void updateAbsence() {
+        System.out.println("\n--- Mettre à jour le nombre d'absences d'un apprenant ---");
+        System.out.print("Entrez l'identifiant de l'apprenant : ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+    
+        System.out.print("Entrez le nouveau nombre d'absences : ");
+        int newAbsence = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline left-over
+    
+        // Appeler la méthode de gestion pour mettre à jour le nombre d'absences
+        ApprenantManagement.updateAbsence(id, newAbsence);
     }
 
     }
