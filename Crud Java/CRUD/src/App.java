@@ -17,6 +17,7 @@ public class App {
             System.out.println("\n--- Gestion apprenants ---");
             System.out.println("1. Créé apprenant");
             System.out.println("2. Voir les apprenants");
+            System.out.println("3. Supprimer un apprenant");
         
             System.out.print("Select an option: ");
             
@@ -30,6 +31,9 @@ public class App {
                  case 2:
                      viewAllApprenants();
                      break;
+                case 3:
+                    deleteApprenant();
+                    break;
             
                 case 6:
                     running = false;
@@ -44,8 +48,22 @@ public class App {
         System.out.println("\n--- Liste des apprenants ---");
         List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
         for (Apprenant apprenant : apprenants) {
+            System.out.println(apprenant.getId());
             System.out.println(apprenant.getName());
-        }}
+        }
+    }
+
+        private static void deleteApprenant() {
+            System.out.println("\n--- Supprimer un apprenant ---");
+            System.out.print("Entrez l'identifiant de l'apprenant à supprimer : ");
+            int id = scanner.nextInt();
+            
+            scanner.nextLine(); // Consume the newline left-over
+            
+        
+            // Appeler la méthode de gestion pour supprimer l'apprenant
+            ApprenantManagement.deleteApprenant(id);
+        }
         
     private static void addNewApprenant() {
 

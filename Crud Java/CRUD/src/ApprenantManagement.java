@@ -24,14 +24,34 @@ public class ApprenantManagement {
                 boolean isDelegue = resultSet.getBoolean("IsDelegue");
                 
                 Apprenant apprenant = new Apprenant(id, promotionName, name, lastName, adress, email, tel, absence, isDelegue);
-               
+                
+                System.out.println("ID apprenant :" + apprenant.getId());
                 System.out.println("Nom apprenant :" + apprenant.getName());
+                
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération des apprenants !");
             e.printStackTrace();
         }
         return apprenants;
+    }
+
+    public static void deleteApprenant(int id) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String sql = "DELETE FROM apprenants WHERE Id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Apprenant supprimé avec succès !");
+            } else {
+                System.out.println("Aucun apprenant trouvé avec cet identifiant.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression de l'apprenant !");
+            e.printStackTrace();
+        }
     }
 
 public static void addApprenant(Apprenant apprenant) {
