@@ -158,7 +158,7 @@ public class App {
         }
     }
 
-    // Les autres méthodes de votre classe App
+
 
 
         private static void deleteApprenant() {
@@ -167,7 +167,7 @@ public class App {
             System.out.print("Entrez l'identifiant de l'apprenant à supprimer : ");
             int id = scanner.nextInt();
             
-            scanner.nextLine(); // Consume the newline left-over
+            scanner.nextLine();
            
             Apprenant apprenantToDelete = ApprenantManagement.getApprenantById(id);
 
@@ -176,13 +176,13 @@ public class App {
                 return;
             }
         
-            // Vérifier si IsDelegue est à 1
+           
             if (apprenantToDelete.getIsDelegue()) {
                 System.out.println("Vous ne pouvez pas supprimer un apprenant délégué !");
                 return;
             }
         
-            // Appeler la méthode de gestion pour supprimer l'apprenant
+        
             ApprenantManagement.deleteApprenant(id);
         }
         
