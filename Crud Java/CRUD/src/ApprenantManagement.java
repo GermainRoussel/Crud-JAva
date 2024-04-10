@@ -65,6 +65,7 @@ public class ApprenantManagement {
         }
         return apprenant;
     }
+    
 
     public static void updateAbsence(int id, int newAbsence) {
         try (Connection connection = DatabaseConnector.getConnection()) {

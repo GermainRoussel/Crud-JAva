@@ -1,3 +1,5 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,14 +50,95 @@ public class App {
         
     }}
 
+    
     private static void viewAllApprenants() {
         System.out.println("\n--- Liste des apprenants ---");
         List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
+        
+        // Trier les apprenants par nom
+        Collections.sort(apprenants, new Comparator<Apprenant>() {
+            @Override
+            public int compare(Apprenant apprenant1, Apprenant apprenant2) {
+                return apprenant1.getName().compareToIgnoreCase(apprenant2.getName());
+            }
+        });
+        
+        
         for (Apprenant apprenant : apprenants) {
             System.out.println(apprenant.getId());
-            
+        }
+        
+        System.out.println("\n1. Tirer par nom");
+        System.out.println("2. Trier par absence");
+        System.out.println("3. Menu Princilap");
+        System.out.print("Select an option: ");
+        int option = scanner.nextInt();
+        scanner.nextLine(); 
+
+        switch (option) {
+            case 1:
+                viewAllApprenantsSortedByName(); 
+                break;
+            case 2:
+                viewAllApprenantsSortedByAbsence();
+                break;
+            case 3: 
+            return;
+            default:
+                System.out.println("Option invalide. Veuillez réessayer.");
         }
     }
+
+    private static void viewAllApprenantsSortedByName() {
+        System.out.println("\n--- Liste des apprenants triée par nom ---");
+        List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
+        Collections.sort(apprenants, new Comparator<Apprenant>() {
+            @Override
+            public int compare(Apprenant apprenant1, Apprenant apprenant2) {
+                return apprenant1.getName().compareToIgnoreCase(apprenant2.getName());
+            }
+        });
+        for (Apprenant apprenant : apprenants) {
+            System.out.println(apprenant.getId());
+        }
+
+        // Proposer le choix de retourner au menu principal
+        System.out.println("\n1. Retourner au menu principal");
+        System.out.print("Select an option: ");
+        int option = scanner.nextInt();
+        if (option == 1) {
+            return; // Retourner au menu principal
+        } else {
+            System.out.println("Option invalide. Retour au menu principal.");
+        }
+    }
+
+    private static void viewAllApprenantsSortedByAbsence() {
+       
+        List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
+        Collections.sort(apprenants, new Comparator<Apprenant>() {
+           
+            public int compare(Apprenant apprenant1, Apprenant apprenant2) {
+                return Integer.compare(apprenant2.getAbsence(), apprenant1.getAbsence()); 
+            }
+        });
+        for (Apprenant apprenant : apprenants) {
+            System.out.println("ID: " + apprenant.getId() + ", Absence: " + apprenant.getAbsence());
+        }
+        
+        
+        System.out.println("\n1. Retourner au menu principal");
+        System.out.print("Select an option: ");
+        int option = scanner.nextInt();
+        if (option == 1) {
+            return; // Retourner au menu principal
+        } else {
+            System.out.println("Option invalide. Retour au menu principal.");
+        }
+    }
+
+    // Les autres méthodes de votre classe App
+
 
         private static void deleteApprenant() {
             viewAllApprenants();
@@ -66,7 +149,7 @@ public class App {
             scanner.nextLine(); // Consume the newline left-over
            
             Apprenant apprenantToDelete = ApprenantManagement.getApprenantById(id);
-            
+
             if (apprenantToDelete == null) {
                 System.out.println("Aucun apprenant trouvé avec cet identifiant.");
                 return;
