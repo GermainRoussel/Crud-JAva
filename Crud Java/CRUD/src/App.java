@@ -21,11 +21,12 @@ public class App {
             System.out.println("2. Voir les apprenants");
             System.out.println("3. Supprimer un apprenant");
             System.out.println("4. Mettre à jour le nombre d'absences d'un apprenant");
+            System.out.println("5. Rechercher un apprenant par promotion");
         
             System.out.print("Select an option: ");
             
             int option = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline left-over
+            scanner.nextLine(); 
 
             switch (option) {
                 case 1:
@@ -40,6 +41,9 @@ public class App {
                 case 4:
                     updateAbsence();
                     break;
+                case 5:
+                    searchApprenantByPromotion();
+                    break;
             
                 case 6:
                     running = false;
@@ -49,6 +53,23 @@ public class App {
                     System.out.println("Invalid option. Please try again.");}
         
     }}
+
+
+    private static void searchApprenantByPromotion() {
+        System.out.println("\n--- Recherche des apprenants par nom de promotion ---");
+        System.out.print("Entrez le nom de la promotion : ");
+        String promotionName = scanner.nextLine();
+    
+        List<Apprenant> apprenants = ApprenantManagement.getApprenantsByPromotion(promotionName);
+        if (apprenants.isEmpty()) {
+            System.out.println("Aucun apprenant trouvé pour la promotion '" + promotionName + "'.");
+        } else {
+            System.out.println("Voici les Apprenants pour la promotion '" + promotionName + "' :");
+            for (Apprenant apprenant : apprenants) {
+                System.out.println("ID: " + apprenant.getId() + ", Nom: " + apprenant.getName() + ", Promotion: " + apprenant.getPromotionName());
+            }
+        }
+    }
 
     
     private static void viewAllApprenants() {
@@ -70,7 +91,7 @@ public class App {
         
         System.out.println("\n1. Tirer par nom");
         System.out.println("2. Trier par absence");
-        System.out.println("3. Menu Princilap");
+        System.out.println("3. Menu Principal");
         System.out.print("Select an option: ");
         int option = scanner.nextInt();
         scanner.nextLine(); 
@@ -102,12 +123,12 @@ public class App {
             System.out.println(apprenant.getId());
         }
 
-        // Proposer le choix de retourner au menu principal
+     
         System.out.println("\n1. Retourner au menu principal");
         System.out.print("Select an option: ");
         int option = scanner.nextInt();
         if (option == 1) {
-            return; // Retourner au menu principal
+            return; 
         } else {
             System.out.println("Option invalide. Retour au menu principal.");
         }
@@ -131,9 +152,9 @@ public class App {
         System.out.print("Select an option: ");
         int option = scanner.nextInt();
         if (option == 1) {
-            return; // Retourner au menu principal
-        } else {
             System.out.println("Option invalide. Retour au menu principal.");
+            return; 
+          
         }
     }
 
@@ -218,14 +239,14 @@ public class App {
         List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
         // Parcourir la liste des apprenants existants
         for (Apprenant apprenant : apprenants) {
-            // Vérifier si le nom et le prénom correspondent à un apprenant existant
+           
             if (apprenant.getName().equalsIgnoreCase(name)) {
                 System.out.println("Un apprenant avec le même nom existe déjà !");
-                return true; // Un apprenant avec le même nom/prénom existe déjà
+                return true; 
                 
             }
         }
-        return false; // Aucun apprenant avec le même nom/prénom trouvé
+        return false;
     }
     private static void updateAbsence() {
         System.out.println("\n--- Mettre à jour le nombre d'absences d'un apprenant ---");

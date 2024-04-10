@@ -65,6 +65,32 @@ public class ApprenantManagement {
         }
         return apprenant;
     }
+    public static List<Apprenant> getApprenantsByPromotion(String promotionName) {
+        List<Apprenant> apprenants = new ArrayList<>();
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String sql = "SELECT * FROM apprenants WHERE PromotionName = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, promotionName);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                String lastName = resultSet.getString("LastName");
+                String adress = resultSet.getString("Adress");
+                String email = resultSet.getString("Email");
+                String tel = resultSet.getString("Tel");
+                int absence = resultSet.getInt("Absence");
+                boolean isDelegue = resultSet.getBoolean("IsDelegue");
+    
+                Apprenant apprenant = new Apprenant(id, promotionName, name, lastName, adress, email, tel, absence, isDelegue);
+                apprenants.add(apprenant);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la recherche des apprenants par nom de promotion !");
+            e.printStackTrace();
+        }
+        return apprenants;
+    }
     
 
     public static void updateAbsence(int id, int newAbsence) {
