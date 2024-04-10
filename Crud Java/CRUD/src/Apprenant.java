@@ -1,17 +1,19 @@
+
+
 public class Apprenant {
 
-    private int id;
-    private string PromotionName;
-    private string Name;
-    private string LastName;
-    private string Adress;
-    private string Email;
-    private string Tel;
+    private int Id;
+    private String PromotionName;
+    private String Name;
+    private String LastName;
+    private String Adress;
+    private String Email;
+    private String Tel;
     private int Absence;
     private boolean IsDelegue;
 
-    #region constructors
-    public Apprenant(int id, string promotionName, string name, string lastName, string adress, string email, string tel, int absence, boolean isDelegue) {
+   
+    public Apprenant(int id, String promotionName, String name, String lastName, String adress, String email, String tel, int absence, boolean isDelegue) {
         this.Id = id;
         this.PromotionName = promotionName;
         this.Name = name;
@@ -22,9 +24,8 @@ public class Apprenant {
         this.Absence = absence;
         this.IsDelegue = isDelegue;
     }
-    #endregion
-
-    #region Getters & Setters
+ 
+   
     public int getId() {
         return this.Id;
     }
@@ -33,55 +34,57 @@ public class Apprenant {
         this.Id = id;
     }
 
-    public string getPromotionName() {
+  
+    public String getPromotionName() {
         return this.PromotionName;
     }
-    public string setPromotionName(string promotionName) {
+
+    public void setPromotionName(String promotionName) {
         this.PromotionName = promotionName;
     }
 
-    public string getName() {
+    public String getName() {
         return this.Name;
     }
-    public string setName(string name) {
+    public void setName(String name) {
         this.Name = name;
     }
-    public string getLastName() {
+    public String getLastName() {
         return this.LastName;
     }
-    public string setLastName(string lastName) {
+    public void setLastName(String lastName) {
         this.LastName = lastName;
     }
-    public string getAdress() {
+    public String getAdress() {
         return this.Adress;
     }
-    public string setAdress(string adress) {
+    public void setAdress(String adress) {
         this.Adress = adress;
     }
-    public string getEmail() {
+    public String getEmail() {
         return this.Email;
     }
-    public string setEmail(string email) {
+    public void setEmail(String email) {
         this.Email = email;
     }
-    public string getTel() {
+    public String getTel() {
         return this.Tel;
     }
-    public string setTel(string tel) {
+    public void setTel(String tel) {
         this.Tel = tel;
     }
     public int getAbsence() {
         return this.Absence;
     }
-    public int setAbsence(int absence) {
+    public void setAbsence(int absence) {
         this.Absence = absence;
     }
     public boolean getIsDelegue() {
         return this.IsDelegue;
     }
-    public boolean setIsDelegue(boolean isDelegue) {
+    public void setIsDelegue(boolean isDelegue) {
         this.IsDelegue = isDelegue;
     }
     
-//#endregion
+
 }
