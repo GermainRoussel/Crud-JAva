@@ -53,7 +53,7 @@ public class App {
         List<Apprenant> apprenants = ApprenantManagement.getAllApprenants();
         for (Apprenant apprenant : apprenants) {
             System.out.println(apprenant.getId());
-            System.out.println(apprenant.getName());
+            
         }
     }
 
@@ -115,10 +115,11 @@ public class App {
     }
     private static void updateAbsence() {
         System.out.println("\n--- Mettre à jour le nombre d'absences d'un apprenant ---");
+        viewAllApprenants();
         System.out.print("Entrez l'identifiant de l'apprenant : ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over
-    
+        
         System.out.print("Entrez le nouveau nombre d'absences : ");
         int newAbsence = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over

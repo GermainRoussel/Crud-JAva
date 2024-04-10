@@ -27,6 +27,10 @@ public class ApprenantManagement {
 
                 System.out.println("ID apprenant :" + apprenant.getId());
                 System.out.println("Nom apprenant :" + apprenant.getName());
+                System.out.println("Prénom apprenant :" + apprenant.getLastName());
+                System.out.println("Absence apprenant :" + apprenant.getAbsence());
+                System.out.println("Délégué apprenant :" + apprenant.getIsDelegue());
+                System.out.println("");
                 
             }
         } catch (SQLException e) {
@@ -46,6 +50,7 @@ public class ApprenantManagement {
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Nombre d'absences mis à jour avec succès !");
+                System.out.println("Nouveau nombre d'absences : " + newAbsence);
             } else {
                 System.out.println("Aucun apprenant trouvé avec cet identifiant.");
             }
